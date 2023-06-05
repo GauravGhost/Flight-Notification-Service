@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const {Enums} = require('../utils/common')
+const {PENDING, SUCCESS, FAILED} = Enums.TICKET_STATUS
 module.exports = (sequelize, DataTypes) => {
   class Ticket extends Model {
     /**
@@ -28,8 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.STRING,
-      values: ["PENDING", "SUCCESS", "FAILED"],
-      defaultValue: "PENDING"
+      values: [PENDING, SUCCESS, FAILED],
+      defaultValue: PENDING,
+      allowNull: false
     }
   }, {
     sequelize,
